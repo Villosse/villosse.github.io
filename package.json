@@ -1,0 +1,8 @@
+{
+  "name": "villosse.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Villosse/villosse.github.io.git",
+  "author": "lenny.chiadmi-delage <lenny.chiadmi-delage@epita.fr>",
+  "license": "MIT"
+}
