@@ -1,5 +1,7 @@
-import { readFileSync } from 'fs';
-import { yaml } from 'js-yaml';
-import { Portfolio } from './schema';
+import { load } from 'js-yaml';
+import { PortfolioSchema } from "./schema";
+import configYaml from "../../config.yaml?raw";
 
-export const config = Portfolio.parse(load(readFileSync("config.yaml", "utf8")));
+export const config = PortfolioSchema.parse(
+    load(configYaml)
+);

@@ -1,0 +1,33 @@
+:root {
+    --foreground: #000;
+    --background: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground: #fff;
+        --background: #000;
+    }
+}
+
+body {
+    color: var(--foreground);
+    background: var(--background);
+    margin: 0;
+    font-family: system-ui, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 1rem auto;
+    border: 3px solid #ddd;
+}
