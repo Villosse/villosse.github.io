@@ -5,11 +5,14 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-    base: "/villosse.github.io/",
+    base: process.env.NODE_ENV === 'production' ?
+        '/villosse.github.io/'
+        : '/',
     assetsInclude: ['**/*.yml', '**/*.yaml'],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
       }
-    }
+    },
+    publicDir: path.resolve(__dirname, './public'),
 })
