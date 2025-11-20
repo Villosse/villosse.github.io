@@ -1,2 +1,72 @@
-name: "Lenny"
-image: "/assets/me.png"
+personal:
+  name: "Lenny"
+  surname: "Villosse"
+  nickname: "LennyDev"
+  title: "Full Stack Developer & UI/UX Enthusiast"
+  image: "/assets/me.png"
+  favicon: "/favicon.ico"
+  description: "Passionate about creating beautiful, functional, and user-centered digital experiences. I specialize in modern web technologies and love turning ideas into reality."
+
+contact:
+  email: "lenny@toto.com"
+  phone: "+1 (555) 123-4567"
+  github: "https://github.com/lenny"
+  linkedin: "https://linkedin.com/in/lenny"
+  website: "https://lenny.dev"
+  toto: https://test.tv
+
+skills:
+  - "JavaScript"
+  - "TypeScript"
+  - name: "React"
+    level: 10
+  - "Node.js"
+  - "Python"
+  - "CSS"
+  - "HTML"
+  - "Git"
+  - "Docker"
+  - "AWS"
+  - "MongoDB"
+  - "PostgreSQL"
+
+projects:
+  - title: "E-Commerce Platform"
+    description: "A full-stack web application built with React and Node.js featuring user authentication, payment processing, and inventory management"
+    tech: ["React", "Node.js", "MongoDB", "Stripe"]
+    github: "https://github.com/lenny/ecommerce"
+    demo: "https://ecommerce-demo.lenny.dev"
+    
+  - title: "Task Management App"
+    description: "A productivity app with real-time collaboration features, drag-and-drop interface, and team management capabilities"
+    tech: ["TypeScript", "React", "Socket.io", "Express"]
+    github: "https://github.com/lenny/task-manager"
+    demo: "https://tasks.lenny.dev"
+    
+  - title: "Data Visualization Dashboard"
+    description: "Interactive charts and analytics dashboard for business intelligence with real-time data updates and custom reporting"
+    tech: ["D3.js", "React", "Python", "FastAPI"]
+    github: "https://github.com/lenny/analytics-dashboard"
+    demo: "https://analytics.lenny.dev"
+
+experience:
+  - company: "Tech Startup Inc."
+    position: "Senior Frontend Developer"
+    duration: "2022 - Present"
+    description: "Led frontend development for SaaS platform serving 10k+ users"
+    
+  - company: "Digital Agency Co."
+    position: "Full Stack Developer"
+    duration: "2020 - 2022"
+    description: "Built web applications for various clients using React and Node.js"
+    
+  - company: "Freelance"
+    position: "Web Developer"
+    duration: "2019 - 2020"
+    description: "Developed custom websites and web applications for small businesses"
+
+education:
+  - institution: "University of Technology"
+    degree: "Bachelor of Computer Science"
+    year: "2019"
+    description: "Specialized in web technologies and software engineering"
