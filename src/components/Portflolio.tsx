@@ -1,225 +1,179 @@
 import React from 'react';
 import { config } from '../config';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/Card';
-import { Avatar, AvatarImage, AvatarFallback } from './ui/Avatar';
-import { Button } from './ui/Button';
-import { ProgressBar } from './ui/ProgressBar';
 import { ContactIcon } from './ui/ContactIcon';
 import { getContactItems, getPrimaryEmail } from '../utils/contacts';
-import { normalizeSkill, getSkillBarColor, getSkillCardColor } from '../utils/skills';
+import { normalizeSkill } from '../utils/skills';
 
 export const Portfolio: React.FC = () => {
-    const getInitials = (name: string, surname: string) => {
-        return `${name.charAt(0).toUpperCase()}${surname.charAt(0).toUpperCase()}`;
-    };
-    
-    const getFullName = (name: string, surname: string) => {
-        return `${name} ${surname}`;
-    };
-
-    // Get dynamic contact items
+    const fullName = `${config.personal.name} ${config.personal.surname}`;
+    const initials = `${config.personal.name[0]}${config.personal.surname[0]}`.toUpperCase();
     const contactItems = getContactItems(config.contact);
     const primaryEmail = getPrimaryEmail(config.contact);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-background to-muted/20">
-            <div className="container py-12">
-                {/* Hero Section */}
-                <Card className="max-w-4xl mx-auto mb-8 hero-card">
-                    <CardHeader className="text-center pb-8">
-                        <div className="flex justify-center mb-6">
-                            <Avatar style={{ width: '80px', height: '80px' }} className="ring-4 ring-primary/10 hero-avatar">
-                                <AvatarImage 
-                                    src={config.personal.image} 
-                                    alt={getFullName(config.personal.name, config.personal.surname)}
-                                    style={{ width: '80px', height: '80px', objectFit: 'cover' }}
-                                />
-                                <AvatarFallback className="text-lg font-semibold">
-                                    {getInitials(config.personal.name, config.personal.surname)}
-                                </AvatarFallback>
-                            </Avatar>
+        <div className="page-wrapper">
+            <div className="container">
+
+                {/* Hero */}
+                <div className="card hero">
+                    <div className="hero-avatar-wrap">
+                        <img
+                            src={config.personal.image}
+                            alt={fullName}
+                            className="hero-avatar"
+                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                        />
+                        <div className="hero-avatar-fallback" style={{ display: 'none' }}>
+                            {initials}
                         </div>
-                        <CardTitle className="text-4xl font-bold mb-2 hero-title">{getFullName(config.personal.name, config.personal.surname)}</CardTitle>
-                        <CardDescription className="text-xl text-muted-foreground mb-4 hero-subtitle">
-                            {config.personal.title}
-                        </CardDescription>
-                        <p className="text-muted-foreground max-w-2xl mx-auto hero-description">
-                            {config.personal.description}
-                        </p>
-                    </CardHeader>
-                    
-                    <CardContent className="text-center">
-                        <div className="flex gap-4 justify-center mb-6 hero-buttons">
-                            <Button size="lg" className="font-semibold">
-                                View My Work
-                            </Button>
+                    </div>
+
+                    <div className="hero-body">
+                        <h1 className="hero-name">{fullName}</h1>
+                        <p className="hero-title">{config.personal.title}</p>
+                        <p className="hero-description">{config.personal.description}</p>
+
+                        <div className="hero-actions">
                             {primaryEmail && (
-                                <Button variant="outline" size="lg">
-                                    <a href={`mailto:${primaryEmail}`} className="text-inherit no-underline">
-                                        Get In Touch
-                                    </a>
-                                </Button>
+                                <a href={`mailto:${primaryEmail}`} className="btn btn-primary btn-lg">
+                                    Get in touch
+                                </a>
                             )}
-                        </div>
-                        
-                        {/* Dynamic Contact Links */}
-                        {contactItems.length > 0 && (
-                            <div className="flex gap-4 justify-center text-sm text-muted-foreground flex-wrap hero-contacts">
-                                {contactItems.map((contact) => (
-                                    <a 
-                                        key={contact.key}
-                                        href={contact.href} 
-                                        target={contact.isEmail ? undefined : "_blank"} 
-                                        rel={contact.isEmail ? undefined : "noopener noreferrer"} 
-                                        className="flex items-center gap-2 hover:text-primary transition-colors"
+                            <div className="hero-contacts">
+                                {contactItems.map((c) => (
+                                    <a
+                                        key={c.key}
+                                        href={c.href}
+                                        target={c.isEmail ? undefined : '_blank'}
+                                        rel={c.isEmail ? undefined : 'noopener noreferrer'}
+                                        className="contact-link"
                                     >
-                                        <ContactIcon type={contact.icon} className="w-4 h-4" />
-                                        <span>{contact.label}</span>
+                                        <ContactIcon type={c.icon} className="w-4 h-4" />
+                                        {c.label}
                                     </a>
                                 ))}
                             </div>
-                        )}
-                    </CardContent>
-                </Card>
+                        </div>
+                    </div>
+                </div>
 
-                {/* Skills & Projects Grid */}
-                <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-8">
-                    {/* Skills Section */}
-                    <Card className="skill-card">
-                        <CardHeader>
-                            <CardTitle className="text-2xl font-bold">Skills & Technologies</CardTitle>
-                            <CardDescription>
-                                Technologies I work with on a regular basis
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="grid grid-cols-1 gap-4">
-                                {config.skills.map((skill, index) => {
-                                    const skillItem = normalizeSkill(skill);
-                                    return (
-                                        <div 
-                                            key={index}
-                                            className={`skill-card px-4 py-4 rounded-lg border transition-all hover:scale-[1.01] ${getSkillCardColor(skillItem.level)}`}
-                                        >
-                                            <div className="flex items-center gap-4">
-                                                <div className="font-semibold text-foreground min-w-[8rem]">{skillItem.name}</div>
-                                                {skillItem.level ? (
-                                                    <ProgressBar 
-                                                        value={skillItem.level} 
-                                                        max={10}
-                                                        color={getSkillBarColor(skillItem.level)}
-                                                        className="flex-1"
-                                                    />
-                                                ) : (
-                                                    <div className="flex-1"></div>
-                                                )}
-                                                
-                                                {skillItem.description && (
-                                                    <div className="text-xs text-muted-foreground">
-                                                        {skillItem.description}
-                                                    </div>
-                                                )}
+                {/* Skills + Experience */}
+                <div className="two-col">
+
+                    {/* Skills */}
+                    <div className="card">
+                        <div className="card-header">
+                            <p className="section-title">Skills</p>
+                        </div>
+                        <div className="card-content">
+                            <div className="skill-list">
+                                {config.skills.map((skill, i) => {
+                                    const s = normalizeSkill(skill);
+                                    return s.level ? (
+                                        <div key={i} className="skill-row">
+                                            <span className="skill-name">{s.name}</span>
+                                            <div className="skill-bar-track">
+                                                <div
+                                                    className="skill-bar-fill"
+                                                    style={{ width: `${(s.level / 10) * 100}%` }}
+                                                />
                                             </div>
+                                        </div>
+                                    ) : (
+                                        <div key={i} className="skill-row">
+                                            <span className="skill-tag">{s.name}</span>
                                         </div>
                                     );
                                 })}
                             </div>
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </div>
 
-                    {/* Projects Section */}
-                    <Card className="project-card">
-                        <CardHeader>
-                            <CardTitle className="text-2xl font-bold">Featured Projects</CardTitle>
-                            <CardDescription>
-                                Some of my recent work and side projects
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            {config.projects.map((project, index) => (
-                                <div key={index} className="project-item border rounded-lg p-4 hover:bg-accent/50 transition-colors">
-                                    <div className="flex justify-between items-start mb-1">
-                                        <h4 className="font-semibold text-foreground">{project.title}</h4>
-                                        <div className="flex gap-2">
-                                            {project.github && (
-                                                <a href={project.github} target="_blank" rel="noopener noreferrer" 
-                                                   className="text-xs text-primary hover:underline">
-                                                    GitHub
-                                                </a>
-                                            )}
-                                            {project.demo && (
-                                                <a href={project.demo} target="_blank" rel="noopener noreferrer"
-                                                   className="text-xs text-primary hover:underline">
-                                                    Demo
-                                                </a>
-                                            )}
+                    {/* Experience */}
+                    <div className="card">
+                        <div className="card-header">
+                            <p className="section-title">Experience</p>
+                        </div>
+                        <div className="card-content">
+                            <div className="timeline">
+                                {config.experience.map((exp, i) => (
+                                    <div key={i} className="timeline-item">
+                                        <div className="timeline-top">
+                                            <span className="timeline-position">{exp.position}</span>
+                                            <span className="timeline-date">{exp.duration}</span>
+                                        </div>
+                                        <div className="timeline-company">{exp.company}</div>
+                                        <p className="timeline-desc">{exp.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Projects + Education */}
+                <div className="two-col">
+
+                    {/* Projects */}
+                    <div className="card">
+                        <div className="card-header">
+                            <p className="section-title">Projects</p>
+                        </div>
+                        <div className="card-content">
+                            <div className="project-list">
+                                {config.projects.map((p, i) => (
+                                    <div key={i} className="project-item">
+                                        <div className="project-top">
+                                            <span className="project-title">{p.title}</span>
+                                            <div className="project-links">
+                                                {p.github && (
+                                                    <a href={p.github} target="_blank" rel="noopener noreferrer" className="project-link">
+                                                        GitHub
+                                                    </a>
+                                                )}
+                                                {p.demo && (
+                                                    <a href={p.demo} target="_blank" rel="noopener noreferrer" className="project-link">
+                                                        Demo
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <p className="project-desc">{p.description}</p>
+                                        <div className="tech-tags">
+                                            {p.tech.map((t, j) => (
+                                                <span key={j} className="tech-tag">{t}</span>
+                                            ))}
                                         </div>
                                     </div>
-                                    <p className="text-sm text-muted-foreground mb-2">{project.description}</p>
-                                    <div className="flex gap-2 flex-wrap">
-                                        {project.tech.map((tech, techIndex) => (
-                                            <span 
-                                                key={techIndex}
-                                                className="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Education */}
+                    <div className="card">
+                        <div className="card-header">
+                            <p className="section-title">Education</p>
+                        </div>
+                        <div className="card-content">
+                            <div className="timeline">
+                                {config.education.map((edu, i) => (
+                                    <div key={i} className="timeline-item">
+                                        <div className="timeline-top">
+                                            <span className="timeline-position">{edu.degree}</span>
+                                            <span className="timeline-date">{edu.year}</span>
+                                        </div>
+                                        <div className="timeline-company">{edu.institution}</div>
+                                        {edu.description && (
+                                            <p className="timeline-desc">{edu.description}</p>
+                                        )}
                                     </div>
-                                </div>
-                            ))}
-                        </CardContent>
-                    </Card>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                {/* Experience & Education Grid */}
-                <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                    {/* Experience Section */}
-                    <Card className="experience-card">
-                        <CardHeader>
-                            <CardTitle className="text-2xl font-bold">Work Experience</CardTitle>
-                            <CardDescription>
-                                My professional journey and career highlights
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            {config.experience.map((exp, index) => (
-                                <div key={index} className="experience-item border rounded-lg p-4 hover:bg-accent/50 transition-colors">
-                                    <div className="flex justify-between items-start mb-1">
-                                        <h4 className="font-semibold text-foreground">{exp.position}</h4>
-                                        <span className="text-xs text-muted-foreground">{exp.duration}</span>
-                                    </div>
-                                    <p className="text-sm font-medium text-primary mb-2">{exp.company}</p>
-                                    <p className="text-sm text-muted-foreground">{exp.description}</p>
-                                </div>
-                            ))}
-                        </CardContent>
-                    </Card>
-
-                    {/* Education Section */}
-                    <Card className="education-card">
-                        <CardHeader>
-                            <CardTitle className="text-2xl font-bold">Education</CardTitle>
-                            <CardDescription>
-                                My academic background and qualifications
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            {config.education.map((edu, index) => (
-                                <div key={index} className="education-item border rounded-lg p-4 hover:bg-accent/50 transition-colors">
-                                    <div className="flex justify-between items-start mb-1">
-                                        <h4 className="font-semibold text-foreground">{edu.degree}</h4>
-                                        <span className="text-xs text-muted-foreground">{edu.year}</span>
-                                    </div>
-                                    <p className="text-sm font-medium text-primary mb-2">{edu.institution}</p>
-                                    {edu.description && (
-                                        <p className="text-sm text-muted-foreground">{edu.description}</p>
-                                    )}
-                                </div>
-                            ))}
-                        </CardContent>
-                    </Card>
-                </div>
             </div>
         </div>
     );
