@@ -1,41 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-    --background: 220 20% 97%;
-    --foreground: 222 25% 12%;
+    --background: 270 20% 98%;
+    --foreground: 270 15% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 222 25% 12%;
-    --muted: 220 15% 94%;
-    --muted-foreground: 220 10% 46%;
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --primary: 231 70% 56%;
+    --card-foreground: 270 15% 12%;
+    --muted: 270 15% 95%;
+    --muted-foreground: 270 8% 46%;
+    --border: 270 12% 88%;
+    --input: 270 12% 88%;
+    --primary: 268 60% 52%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 15% 94%;
-    --secondary-foreground: 222 25% 12%;
-    --accent: 231 70% 96%;
-    --accent-foreground: 231 70% 40%;
-    --ring: 231 70% 56%;
+    --secondary: 270 15% 95%;
+    --secondary-foreground: 270 15% 12%;
+    --accent: 268 60% 95%;
+    --accent-foreground: 268 60% 36%;
+    --ring: 268 60% 52%;
     --radius: 0.75rem;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --background: 222 28% 9%;
-        --foreground: 220 20% 92%;
-        --card: 222 28% 12%;
-        --card-foreground: 220 20% 92%;
-        --muted: 222 28% 16%;
-        --muted-foreground: 220 10% 55%;
-        --border: 222 28% 20%;
-        --input: 222 28% 20%;
-        --primary: 231 70% 62%;
+        --background: 268 20% 8%;
+        --foreground: 268 15% 92%;
+        --card: 268 20% 11%;
+        --card-foreground: 268 15% 92%;
+        --muted: 268 20% 15%;
+        --muted-foreground: 268 8% 56%;
+        --border: 268 20% 19%;
+        --input: 268 20% 19%;
+        --primary: 268 65% 65%;
         --primary-foreground: 0 0% 100%;
-        --secondary: 222 28% 16%;
-        --secondary-foreground: 220 20% 92%;
-        --accent: 231 40% 18%;
-        --accent-foreground: 231 70% 72%;
-        --ring: 231 70% 62%;
+        --secondary: 268 20% 15%;
+        --secondary-foreground: 268 15% 92%;
+        --accent: 268 40% 17%;
+        --accent-foreground: 268 65% 78%;
+        --ring: 268 65% 65%;
     }
 }
 
