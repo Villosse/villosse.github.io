@@ -12,7 +12,7 @@ export const getContactItems = (contacts: Record<string, string | undefined>): C
   // Define known contact types with their display labels and icons (little hacky lul)
   const knownContacts: Record<string, { label: string; isEmail?: boolean; showValue?: boolean; icon?: string }> = {
     email: { label: 'Email', isEmail: true, showValue: true, icon: 'email' },
-    phone: { label: 'Phone', showValue: true, icon: 'phone' },
+    phone: { label: 'Phone', showValue: false, icon: 'phone' },
     github: { label: 'GitHub', icon: 'github' },
     linkedin: { label: 'LinkedIn', icon: 'linkedin' },
     website: { label: 'Website', icon: 'website' },

@@ -1,14 +1,13 @@
 import React from 'react';
 import { config } from '../config';
 import { ContactIcon } from './ui/ContactIcon';
-import { getContactItems, getPrimaryEmail } from '../utils/contacts';
+import { getContactItems } from '../utils/contacts';
 import { normalizeSkill } from '../utils/skills';
 
 export const Portfolio: React.FC = () => {
     const fullName = `${config.personal.name} ${config.personal.surname}`;
     const initials = `${config.personal.name[0]}${config.personal.surname[0]}`.toUpperCase();
     const contactItems = getContactItems(config.contact);
-    const primaryEmail = getPrimaryEmail(config.contact);
 
     return (
         <div className="page-wrapper">
@@ -36,24 +35,17 @@ export const Portfolio: React.FC = () => {
                         <h1 className="hero-name">{fullName}</h1>
                         <p className="hero-title">{config.personal.title}</p>
                         <p className="hero-description">{config.personal.description}</p>
-
                         <div className="hero-contacts">
-                            {primaryEmail && (
-                                <a href={`mailto:${primaryEmail}`} className="contact-link contact-link-primary">
-                                    <ContactIcon type="email" className="w-4 h-4" />
-                                    {primaryEmail}
-                                </a>
-                            )}
-                            {contactItems.filter(c => !c.isEmail).map((c) => (
+                            {contactItems.map((c) => (
                                 <a
                                     key={c.key}
                                     href={c.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    target={c.isEmail ? undefined : '_blank'}
+                                    rel={c.isEmail ? undefined : 'noopener noreferrer'}
                                     className="contact-link"
                                 >
                                     <ContactIcon type={c.icon} className="w-4 h-4" />
-                                    {c.label}
+                                    <span>{c.label}</span>
                                 </a>
                             ))}
                         </div>
