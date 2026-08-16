@@ -28,6 +28,14 @@ nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
                 pkgs = nixpkgsFor.${system};
               in
               {
+                apps.default = {
+                  type = "app";
+                  program = toString (pkgs.writeShellScript "dev" ''
+                    yarn install
+                    yarn dev
+                  '');
+                };
+
                 devShell = pkgs.mkShell {
                   buildInputs = with pkgs; [
                     git
