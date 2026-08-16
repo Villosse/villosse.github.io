@@ -12,7 +12,7 @@
     --primary-foreground: 0 0% 100%;
     --accent: 268 60% 95%;
     --accent-foreground: 268 60% 36%;
-    --radius: 0.5rem;
+    --radius: 0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,7 +23,7 @@
         --card-foreground: 0 0% 92%;
         --muted: 0 0% 16%;
         --muted-foreground: 0 0% 55%;
-        --border: 0 0% 20%;
+        --border: 0 0% 28%;
         --primary: 268 65% 65%;
         --primary-foreground: 0 0% 100%;
         --accent: 268 40% 17%;
@@ -175,10 +175,13 @@ a:hover {
     color: hsl(var(--muted-foreground));
     padding: 0.28rem 0.7rem;
     border: 1px solid hsl(var(--border));
-    border-radius: 100px;
+    border-radius: 0;
     transition: color 0.12s, border-color 0.12s, background 0.12s;
     text-decoration: none;
     white-space: nowrap;
+    cursor: pointer;
+    background: hsl(var(--muted));
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
 }
 
 .contact-link svg {
@@ -317,20 +320,20 @@ a:hover {
     flex: 1;
     height: 4px;
     background: hsl(var(--muted));
-    border-radius: 100px;
+    border-radius: 0;
     overflow: hidden;
 }
 
 .skill-bar-fill {
     height: 100%;
-    border-radius: 100px;
+    border-radius: 0;
     background: hsl(var(--primary));
 }
 
 .skill-tag {
     font-size: 0.78rem;
     padding: 0.18rem 0.6rem;
-    border-radius: 100px;
+    border-radius: 0;
     background: hsl(var(--muted));
     color: hsl(var(--muted-foreground));
     border: 1px solid hsl(var(--border));
@@ -381,7 +384,7 @@ a:hover {
     color: hsl(var(--primary));
     padding: 0.12rem 0.5rem;
     border: 1px solid hsl(var(--primary) / 0.3);
-    border-radius: 100px;
+    border-radius: 0;
     transition: background 0.12s;
     text-decoration: none;
 }
@@ -407,7 +410,7 @@ a:hover {
 .tech-tag {
     font-size: 0.7rem;
     padding: 0.12rem 0.5rem;
-    border-radius: 100px;
+    border-radius: 0;
     background: hsl(var(--accent));
     color: hsl(var(--accent-foreground));
     font-family: 'JetBrains Mono', monospace;
