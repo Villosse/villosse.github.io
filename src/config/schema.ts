@@ -8,6 +8,8 @@ const PersonalSchema = z.object({
     image: z.string().min(1, "Image URL is required").startsWith("/"),
     favicon: z.string().min(1, "Favicon URL is required").startsWith("/"),
     description: z.string().min(1, "Description is required"),
+    url: z.string().url("Valid site URL is required").optional(),
+    ogImage: z.string().startsWith("/").optional(),
     location: z.string().optional(),
     citizenship: z.string().optional(),
     summary: z.string().optional(),
@@ -83,25 +85,14 @@ const SkillGroupSchema = z.object({
     items: z.array(z.string()).min(1, "At least one item is required"),
 });
 
-const SkillSchema = z.union([
-    z.string(), // Simple string for backward compatibility
-    z.object({
-        name: z.string().min(1, "Skill name is required"),
-        level: z.number().min(1).max(10, "Level must be between 1 and 10").optional(),
-        years: z.number().min(0).optional(),
-        description: z.string().optional(),
-    })
-]);
-
 export const PortfolioSchema = z.object({
     personal: PersonalSchema,
     contact: ContactSchema,
-    skills: z.array(SkillSchema).min(1, "At least one skill is required"),
+    skills: z.array(SkillGroupSchema).min(1, "At least one skill group is required"),
     projects: z.array(ProjectSchema).min(1, "At least one project is required"),
     experience: z.array(ExperienceSchema).min(1, "At least one experience is required"),
     education: z.array(EducationSchema).min(1, "At least one education entry is required"),
     volunteering: z.array(VolunteeringSchema).optional(),
-    skillGroups: z.array(SkillGroupSchema).optional(),
 });
 
 export type Highlight = z.infer<typeof HighlightSchema>;

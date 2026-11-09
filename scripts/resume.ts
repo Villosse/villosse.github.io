@@ -74,7 +74,7 @@ const out = [
     ...bullets(v.highlights, '  '),
   ])),
 
-  ...section('Skills', (config.skillGroups ?? []).map((g, i, gs) =>
+  ...section('Skills', config.skills.map((g, i, gs) =>
     `*${escapeTypst(g.name)}:* ${g.items.map(escapeTypst).join(', ')}${i < gs.length - 1 ? ' \\' : ''}`,
   )),
   '',

@@ -32,16 +32,17 @@ config.yaml  →  src/config/index.ts  (js-yaml parse + Zod validation)
 
 Edit `config.yaml`. The schema (`src/config/schema.ts`) defines what fields are accepted:
 
-- `personal` — name, title, image path (must start with `/`), description
+- `personal` — name, title, image path (must start with `/`), description; `url` and `ogImage` feed the link-preview tags
 - `contact` — known keys (`email`, `github`, `linkedin`, `phone`, `twitter`, `discord`, `telegram`, `resume`, `website`) plus arbitrary custom keys; all optional. Custom keys are rendered with a capitalized label and no icon.
-- `skills` — each entry is either a plain string or an object with `name`, optional `level` (1–10), `years`, `description`. Level drives a color-coded progress bar.
 - `projects`, `experience`, `education`, `volunteering` — arrays; see schema for required fields. Each entry may have `highlights` (bullets, optionally `{ text, items }` for sub-bullets) and `resume: false` to appear on the website only.
-- `skillGroups` — named skill lists (shown on the site and as the resume's Skills section).
+- `skills` — named groups of skills `{ name, items }`, shown on the site and as the resume's Skills section.
 - Text fields accept `**bold**` and `[label](url)` (`src/utils/richtext.ts` converts to Typst and React).
 
 ### Resume PDF
 
 `scripts/resume.ts` validates `config.yaml`, writes `resume/resume.typ` (gitignored), which applies the layout in `resume/template.typ`; `typst compile` turns it into `public/resume.pdf` (gitignored) using the vendored XCharter fonts in `resume/fonts/`. The resume uses `highlights`, not `description`. The phone number is never committed: it comes from the `RESUME_PHONE` env var (a `.env` file locally, a GitHub Actions secret in CI) and is omitted when unset.
+
+The `head-from-config` plugin in `vite.config.ts` writes the `<title>`, favicon link, meta description and Open Graph tags into `index.html` from `personal`, so they are present without JavaScript.
 
 Static assets (avatar, etc.) go in `public/assets/` and are referenced as `/assets/filename`.
 
@@ -51,7 +52,6 @@ Static assets (avatar, etc.) go in `public/assets/` and are referenced as `/asse
 
 Utility logic lives in:
 - `src/utils/contacts.ts` — maps the contact record to typed `ContactItem[]` for rendering
-- `src/utils/skills.ts` — normalizes string/object skills
 - `src/utils/richtext.ts` — inline markup parser, Typst escaping, and the `--` → en dash conversion
 
 Styling is plain CSS in `src/styles/global.css`, themed with CSS variables. The `@` alias resolves to `src/`.

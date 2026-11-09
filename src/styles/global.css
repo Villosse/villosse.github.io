@@ -321,39 +321,6 @@ a:hover {
 
 /* ── Skills ─────────────────────────────────── */
 
-.skill-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-}
-
-.skill-row {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-}
-
-.skill-name {
-    font-size: 0.845rem;
-    font-weight: 500;
-    min-width: 5.5rem;
-    color: hsl(var(--foreground));
-}
-
-.skill-bar-track {
-    flex: 1;
-    height: 4px;
-    background: hsl(var(--muted));
-    border-radius: 0;
-    overflow: hidden;
-}
-
-.skill-bar-fill {
-    height: 100%;
-    border-radius: 0;
-    background: hsl(var(--primary));
-}
-
 .skill-tag {
     font-size: 0.78rem;
     padding: 0.18rem 0.6rem;
@@ -363,7 +330,7 @@ a:hover {
     border: 1px solid hsl(var(--border));
 }
 
-.skill-group {
+.skill-group + .skill-group {
     margin-top: 1rem;
 }
 

@@ -8,8 +8,10 @@ personal:
   surname: "Chiadmi--Delage"
   nickname: "villosse"
   title: "CS Engineering Student | EPITA GISTRE | Compilers & Embedded Systems"
-  image: "/assets/me.png"
+  image: "/assets/me.webp"
   favicon: "/favicon.ico"
+  url: "https://villosse.github.io"
+  ogImage: "/assets/me-og.jpg"
   location: "Paris, France"
   citizenship: "EU citizen"
   description: "Computer science engineering student at EPITA, specializing in embedded and real-time systems, with hands-on experience in compiler development. Looking for an internship in compilers or systems programming starting February 2027."
@@ -22,23 +24,12 @@ contact:
   resume: "/resume.pdf"
 
 skills:
-  - name: "C++"
-    level: 8
-  - name: "OCaml"
-    level: 7
-  - name: "C#"
-    level: 6
-  - name: "Python"
-    level: 5
-  - "GitLab CI"
-
-skillGroups:
   - name: "Programming Languages"
-    items: ["C", "C++", "OCaml", "Rust", "Bash", "MIPS Assembly", "x86-64 Assembly", "Python", "SQL"]
+    items: ["C", "C++", "C#", "OCaml", "Rust", "Bash", "MIPS Assembly", "x86-64 Assembly", "Python", "SQL"]
   - name: "Domains"
     items: ["Compilers", "Operating Systems", "Kernel Development", "Embedded Systems", "Low-Level Programming", "Open Source"]
   - name: "Tools"
-    items: ["GCC", "LLVM", "GDB", "QEMU", "Git", "CMake", "Cargo", "Autotools", "Docker", "Nix", "Linux"]
+    items: ["GCC", "LLVM", "GDB", "QEMU", "Git", "GitLab CI", "CMake", "Cargo", "Autotools", "Docker", "Nix", "Linux"]
   - name: "Languages"
     items: ["French (native)", "English (fluent)"]
 
@@ -127,12 +118,6 @@ projects:
     tech: ["C++", "Rust", "GCC", "Compilers"]
     github: "https://github.com/Rust-GCC/gccrs"
     resume: false
-  - title: "Prologin 2026 Final Game"
-    description: "Wrote the game for the Prologin 2026 final, in which finalists program AIs that compete against each other; a similar game was made for Gradient 2026, a contest organized with Mistral AI."
-    tech: ["Game Development", "AI Contest"]
-    github: "https://gitlab.com/prologin/concours/jeux/2026-mistral"
-    demo: "https://prologin.org"
-    resume: false
 
 volunteering:
   - organization: "Prologin"
@@ -140,7 +125,7 @@ volunteering:
     duration: "2022 -- Present"
     highlights:
       - "Content Lead for Girls Can Code!, weekend workshops where girls learn the basics of programming, and for 1--2 hour introductory programming sessions with school classes."
-      - "Wrote the game for the Prologin 2026 final, in which finalists program AIs that compete against each other; a similar game was made for Gradient 2026, a contest organized with Mistral AI."
+      - "Wrote [the game](https://gitlab.com/prologin/concours/jeux/2026-mistral) for the Prologin 2026 final, in which finalists program AIs that compete against each other; a similar game was made for Gradient 2026, a contest organized with Mistral AI."
       - "Co-organized a hackathon at BNP Paribas in London."
   - organization: "L.A.T.E.B."
     description: "Student brewing association"

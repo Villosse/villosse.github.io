@@ -2,7 +2,6 @@ import React from 'react';
 import { config } from '../config';
 import { ContactIcon } from './ui/ContactIcon';
 import { getContactItems } from '../utils/contacts';
-import { normalizeSkill } from '../utils/skills';
 import { RichText } from './ui/RichText';
 import type { Highlight } from '../config/schema';
 
@@ -37,6 +36,8 @@ export const Portfolio: React.FC = () => {
                         <img
                             src={config.personal.image}
                             alt={fullName}
+                            width={84}
+                            height={84}
                             className="hero-avatar"
                             onError={(e) => {
                                 e.currentTarget.style.display = 'none';
@@ -152,27 +153,7 @@ export const Portfolio: React.FC = () => {
 
                         <section aria-label="Skills" className="card section-card">
                             <h2 className="section-title">Skills</h2>
-                            <div className="skill-list">
-                                {config.skills.map((skill, i) => {
-                                    const s = normalizeSkill(skill);
-                                    return s.level ? (
-                                        <div key={i} className="skill-row">
-                                            <span className="skill-name">{s.name}</span>
-                                            <div className="skill-bar-track" title={`${s.level}/10`}>
-                                                <div
-                                                    className="skill-bar-fill"
-                                                    style={{ width: `${(s.level / 10) * 100}%` }}
-                                                />
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div key={i} className="skill-row">
-                                            <span className="skill-tag">{s.name}</span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                            {config.skillGroups?.map((g) => (
+                            {config.skills.map((g) => (
                                 <div key={g.name} className="skill-group">
                                     <h3 className="skill-group-title">{g.name}</h3>
                                     <div className="skill-group-items">
