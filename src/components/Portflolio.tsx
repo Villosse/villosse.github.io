@@ -3,6 +3,24 @@ import { config } from '../config';
 import { ContactIcon } from './ui/ContactIcon';
 import { getContactItems } from '../utils/contacts';
 import { normalizeSkill } from '../utils/skills';
+import { RichText } from './ui/RichText';
+import type { Highlight } from '../config/schema';
+
+const Highlights: React.FC<{ items?: Highlight[] }> = ({ items }) =>
+    items?.length ? (
+        <ul className="tl-list">
+            {items.map((h, i) =>
+                typeof h === 'string' ? (
+                    <li key={i}><RichText text={h} /></li>
+                ) : (
+                    <li key={i}>
+                        <RichText text={h.text} />
+                        <Highlights items={h.items} />
+                    </li>
+                )
+            )}
+        </ul>
+    ) : null;
 
 export const Portfolio: React.FC = () => {
     const fullName = `${config.personal.name} ${config.personal.surname}`;
@@ -69,8 +87,13 @@ export const Portfolio: React.FC = () => {
                                                 <span className="tl-position">{exp.position}</span>
                                                 <time className="tl-date">{exp.duration}</time>
                                             </div>
-                                            <div className="tl-company">{exp.company}</div>
-                                            <p className="tl-desc">{exp.description}</p>
+                                            <div className="tl-company">
+                                                {exp.company}{exp.location && ` · ${exp.location}`}
+                                            </div>
+                                            {exp.description && (
+                                                <p className="tl-desc"><RichText text={exp.description} /></p>
+                                            )}
+                                            <Highlights items={exp.highlights} />
                                         </div>
                                     </article>
                                 ))}
@@ -88,15 +111,39 @@ export const Portfolio: React.FC = () => {
                                                 <span className="tl-position">{edu.degree}</span>
                                                 <time className="tl-date">{edu.year}</time>
                                             </div>
-                                            <div className="tl-company">{edu.institution}</div>
+                                            <div className="tl-company">
+                                                {edu.institution}{edu.location && ` · ${edu.location}`}
+                                            </div>
                                             {edu.description && (
-                                                <p className="tl-desc">{edu.description}</p>
+                                                <p className="tl-desc"><RichText text={edu.description} /></p>
                                             )}
+                                            <Highlights items={edu.highlights} />
                                         </div>
                                     </article>
                                 ))}
                             </div>
                         </section>
+
+                        {config.volunteering && (
+                            <section aria-label="Volunteering" className="card section-card">
+                                <h2 className="section-title">Volunteering</h2>
+                                <div className="timeline">
+                                    {config.volunteering.map((v, i) => (
+                                        <article key={i} className="tl-item">
+                                            <div className="tl-dot" />
+                                            <div className="tl-content">
+                                                <div className="tl-top">
+                                                    <span className="tl-position">{v.organization}</span>
+                                                    <time className="tl-date">{v.duration}</time>
+                                                </div>
+                                                <p className="tl-desc"><RichText text={v.description} /></p>
+                                                <Highlights items={v.highlights} />
+                                            </div>
+                                        </article>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
 
                     </div>
 
@@ -125,6 +172,16 @@ export const Portfolio: React.FC = () => {
                                     );
                                 })}
                             </div>
+                            {config.skillGroups?.map((g) => (
+                                <div key={g.name} className="skill-group">
+                                    <h3 className="skill-group-title">{g.name}</h3>
+                                    <div className="skill-group-items">
+                                        {g.items.map((item) => (
+                                            <span key={item} className="skill-tag">{item}</span>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                         </section>
 
                     </aside>
@@ -151,7 +208,9 @@ export const Portfolio: React.FC = () => {
                                         )}
                                     </div>
                                 </div>
-                                <p className="project-desc">{p.description}</p>
+                                {p.date && <time className="tl-date project-date">{p.date}</time>}
+                                <p className="project-desc"><RichText text={p.description} /></p>
+                                <Highlights items={p.highlights} />
                                 <div className="tech-tags">
                                     {p.tech.map((t, j) => (
                                         <span key={j} className="tech-tag">{t}</span>

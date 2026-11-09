@@ -295,6 +295,26 @@ a:hover {
     margin: 0;
 }
 
+.tl-list {
+    font-size: 0.825rem;
+    color: hsl(var(--muted-foreground));
+    line-height: 1.55;
+    margin: 0.3rem 0 0;
+    padding-left: 1.1rem;
+    list-style: disc;
+}
+
+.tl-list .tl-list {
+    margin-top: 0.15rem;
+    list-style: circle;
+}
+
+.tl-list a,
+.tl-desc a {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+}
+
 /* ── Skills ─────────────────────────────────── */
 
 .skill-list {
@@ -339,6 +359,23 @@ a:hover {
     border: 1px solid hsl(var(--border));
 }
 
+.skill-group {
+    margin-top: 1rem;
+}
+
+.skill-group-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin: 0 0 0.4rem;
+}
+
+.skill-group-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
 /* ── Projects (full width grid) ─────────────── */
 
 .project-grid {
@@ -371,6 +408,15 @@ a:hover {
 .project-title {
     font-size: 0.875rem;
     font-weight: 600;
+}
+
+.project-item .tl-list {
+    margin-bottom: 0.6rem;
+}
+
+.project-date {
+    display: block;
+    margin-bottom: 0.35rem;
 }
 
 .project-links {

@@ -1,16 +1,25 @@
+# Single source for the website and the resume PDF (scripts/resume.ts).
+# Text fields accept **bold** and [label](url).
+# Entries with `resume: false` appear on the website only.
+# The phone number is not stored here: set RESUME_PHONE when building.
+
 personal:
   name: "Lenny"
-  surname: "Chiadmi-Delage"
+  surname: "Chiadmi--Delage"
   nickname: "villosse"
   title: "CS Engineering Student | EPITA GISTRE | Compilers & Embedded Systems"
   image: "/assets/me.png"
   favicon: "/favicon.ico"
-  description: "Third-year at EPITA, GISTRE major. I like working close to the hardware - compilers, low-level stuff, embedded systems. TA on Tiger, EPITA's compiler project. Looking for an internship in compilers or embedded, starting Feb 2027."
+  location: "Paris, France"
+  citizenship: "EU citizen"
+  description: "Computer science engineering student at EPITA, specializing in embedded and real-time systems, with hands-on experience in compiler development. Looking for an internship in compilers or systems programming starting February 2027."
+  summary: "Computer science engineering student specializing in embedded and real-time systems, with hands-on experience in compiler development. Seeking an internship in compilers or systems programming starting February 2027."
 
 contact:
   email: "lenny.chiadmi-delage@epita.fr"
-  github: "https://github.com/villosse"
-  linkedin: "https://www.linkedin.com/in/lenny-chiadmi-delage-33639b239/"
+  github: "https://github.com/Villosse"
+  linkedin: "https://linkedin.com/in/lenny-chiadmi-delage"
+  resume: "/resume.pdf"
 
 skills:
   - name: "C++"
@@ -21,58 +30,120 @@ skills:
     level: 6
   - name: "Python"
     level: 5
-  - "Compilers"
-  - "Embedded Systems"
-  - "Low-level programming"
   - "GitLab CI"
 
+skillGroups:
+  - name: "Programming Languages"
+    items: ["C", "C++", "OCaml", "Rust", "Bash", "MIPS Assembly", "x86-64 Assembly", "Python", "SQL"]
+  - name: "Domains"
+    items: ["Compilers", "Operating Systems", "Kernel Development", "Embedded Systems", "Low-Level Programming", "Open Source"]
+  - name: "Tools"
+    items: ["GCC", "LLVM", "GDB", "QEMU", "Git", "CMake", "Cargo", "Autotools", "Docker", "Nix", "Linux"]
+  - name: "Languages"
+    items: ["French (native)", "English (fluent)"]
+
+experience:
+  - company: "EPITA"
+    position: "Teaching Assistant"
+    location: "Paris, France"
+    duration: "Feb 2026 -- Present"
+    highlights:
+      - text: "**ACU (Jul 2026 -- Present):** teaching team for C and Unix; teach C, shell scripting, and SQL to 600+ students through workshops and projects."
+        items:
+          - "One of 9 assistants responsible for organizing the Piscine, a 2-week intensive C and Unix workshop."
+          - "Wrote exams, tutorials, and project subjects; gave lectures and helped students during lab sessions."
+      - text: "**YAKA (Feb 2026 -- Jul 2026):** 60+ person teaching team; taught C++, Java, JavaScript, object-oriented programming, and algorithms to 600+ first-year engineering students through workshops and projects."
+        items:
+          - "One of 6 maintainers running the 14-week Tiger compiler project ([assignments.lre.epita.fr](https://assignments.lre.epita.fr)), a 20+-year flagship assignment in which students build a complete compiler in C++."
+  - company: "Embecosm"
+    position: "Compiler Engineering Intern"
+    location: "Paris, France"
+    duration: "Sep 2025 -- Feb 2026"
+    highlights:
+      - "Contributed to [github.com/Rust-GCC/gccrs](https://github.com/Rust-GCC/gccrs), the 200,000-line C++ GCC Rust front-end, across the parser, macro expansion, type checking, and HIR lowering (~10 merged PRs, upstreamed into GCC)."
+      - "Fixed 7+ internal compiler errors (ICEs) and segfaults, and improved error reporting by removing duplicate and cascading parser diagnostics."
+  - company: "EPITA - YAKI"
+    position: "Intern"
+    duration: "Sep 2025 -- Feb 2026"
+    description: "Prepared the next YAKA session, worked on the Tiger compiler, and developed OVM, an OCaml virtual machine for Tiger intermediate code."
+    resume: false
+  - company: "EPITA - ACDC (Assistant C# Caml)"
+    position: "Lab Assistant"
+    duration: "Sep 2024 -- Jul 2025"
+    description: "Wrote and supervised programming labs in C# and OCaml for first-year students at EPITA."
+    resume: false
+  - company: "Center Parcs"
+    position: "Summer Intern"
+    duration: "Jul 2023 -- Aug 2023"
+    description: "Worked with Microsoft Excel and Visual Basic for Applications (VBA)."
+    resume: false
+
+education:
+  - institution: "EPITA"
+    location: "France"
+    degree: "Master of Engineering in Computer Science"
+    year: "Sep 2022 -- Expected Jul 2027"
+    highlights:
+      - "Specialization in Embedded & Real-Time Systems (GISTRE)."
+  - institution: "Cracow University of Technology"
+    degree: "Bachelor's degree, Computer Science"
+    year: "Feb -- Jun 2024"
+    resume: false
+
 projects:
-  - title: "OVM - OCaml Virtual Machine"
-    description: "An OCaml virtual machine to interpret Tiger intermediate representation code, developed during the YAKI internship."
-    tech: ["OCaml", "Compilers", "Virtual Machine"]
-    github: "https://gitlab.lre.epita.fr/tiger/ovm"
   - title: "Tiger Compiler"
-    description: "EPITA's compiler construction project (20+ years of history). Maintained the base code and worked on the compiler pipeline as part of YAKI."
-    tech: ["C++", "OCaml", "Compilers"]
+    role: "Maintainer"
+    date: "Jul 2025 -- Present"
+    description: "EPITA's compiler construction project (20+ years of history), in which students build a complete compiler in C++."
+    tech: ["C++", "Compilers", "Nix"]
     github: "https://gitlab.lre.epita.fr/tiger/tc-base"
     demo: "https://assignments.lre.epita.fr"
+    highlights:
+      - "Halved the build environment size and updated the build system to support newer NixOS versions."
+      - "Cleaned up legacy code across the compiler's toolchain."
+  - title: "OCaml Virtual Machine, OVM"
+    role: "Maintainer"
+    date: "Jul 2025 -- Present"
+    description: "An OCaml virtual machine that interprets the Tiger compiler's intermediate representations."
+    tech: ["OCaml", "Compilers", "Virtual Machine"]
+    github: "https://gitlab.lre.epita.fr/tiger/ovm"
+    link: "https://gitlab.lre.epita.fr/tiger/ovm"
+    highlights:
+      - "Improved memory management in the HIR/LIR interpreter of OVM."
+      - "Implemented profiling in OVM, allowing the legacy HAVM interpreter to be deprecated."
+      - "Implementing an assembly to intermediate representation translator to test the Tiger Compiler's infinite-register assembly interpreter."
+  - title: "K"
+    role: "x86 Kernel from Scratch, C, x86 Assembly"
+    date: "2026"
+    description: "An x86 kernel written from scratch that boots through GRUB/Multiboot and runs an ELF game from its own filesystem."
+    tech: ["C", "x86 Assembly", "QEMU"]
+    demo: "https://k.lre.epita.fr"
+    link: "https://k.lre.epita.fr"
+    highlights:
+      - "Built a kernel for x86 from scratch that boots through GRUB/Multiboot and loads and runs an ELF game binary from its own filesystem, tested in QEMU."
+      - "Implemented interrupts (IDT, PIC), serial, keyboard, timer, VGA drivers, a memory manager and syscalls."
   - title: "gccrs - Rust frontend for GCC"
     description: "Contributed to gccrs, the official Rust language frontend for the GCC compiler, during an internship at Embecosm."
     tech: ["C++", "Rust", "GCC", "Compilers"]
-    github: "https://github.com/Villosse/gccrs"
-  - title: "Prologin"
-    description: "Participated in Prologin, a French national competitive programming contest. Competed in 2025 and 2026 (2026-mistral edition)."
-    tech: ["Competitive Programming"]
+    github: "https://github.com/Rust-GCC/gccrs"
+    resume: false
+  - title: "Prologin 2026 Final Game"
+    description: "Wrote the game for the Prologin 2026 final, in which finalists program AIs that compete against each other; a similar game was made for Gradient 2026, a contest organized with Mistral AI."
+    tech: ["Game Development", "AI Contest"]
     github: "https://gitlab.com/prologin/concours/jeux/2026-mistral"
     demo: "https://prologin.org"
+    resume: false
 
-experience:
-  - company: "EPITA - ACU (Assistant C/Unix)"
-    position: "Respo Piscine"
-    duration: "Sep 2026 - Jan 2027"
-    description: "Responsible for the C/Unix bootcamp (piscine) for third-year students. Creating and maintaining pedagogical content, supervising lab sessions, and helping students learn systems programming fundamentals."
-  - company: "EPITA - YAKA (Yet Another Kind of Assistant)"
-    position: "Teaching Assistant (Tiger Compiler)"
-    duration: "Feb 2026 - Jul 2026"
-    description: "Maintained and improved Tiger, EPITA's compiler construction project (20+ years of history). Supported first-year students during workshops and reviewed programming submissions as part of a 60+ person team."
-  - company: "EPITA (YAKI) & Embecosm"
-    position: "Dual Internship - Compilers"
-    duration: "Sep 2025 - Feb 2026"
-    description: "At EPITA (YAKI): prepared the next YAKA session, worked on Tiger compiler, and developed OVM, an OCaml virtual machine for Tiger intermediate code. In parallel at Embecosm: contributed to gccrs, the Rust frontend for GCC."
-  - company: "EPITA - ACDC (Assistant C# Caml)"
-    position: "Lab Assistant"
-    duration: "Sep 2024 - Jul 2025"
-    description: "Wrote and supervised programming labs in C# and OCaml for first-year students at EPITA."
-  - company: "Center Parcs"
-    position: "Summer Intern"
-    duration: "Jul 2023 - Aug 2023"
-    description: "Worked with Microsoft Excel and Visual Basic for Applications (VBA)."
-
-education:
-  - institution: "EPITA - Ecole d'Ingenieurs en Informatique"
-    degree: "Engineering Degree - GISTRE (Real-Time & Embedded Systems)"
-    year: "2022 - 2027"
-    description: "Majoring in real-time and embedded systems (firmware, drivers, RTOS, IoT). Activities: Prologin, Epimac, BackToBasics."
-  - institution: "Cracow University of Technology"
-    degree: "Bachelor's degree, Computer Science"
-    year: "Feb - Jun 2024"
+volunteering:
+  - organization: "Prologin"
+    description: "Volunteer at the non-profit behind France's national computer science contest"
+    duration: "2022 -- Present"
+    highlights:
+      - "Content Lead for Girls Can Code!, weekend workshops where girls learn the basics of programming, and for 1--2 hour introductory programming sessions with school classes."
+      - "Wrote the game for the Prologin 2026 final, in which finalists program AIs that compete against each other; a similar game was made for Gradient 2026, a contest organized with Mistral AI."
+      - "Co-organized a hackathon at BNP Paribas in London."
+  - organization: "L.A.T.E.B."
+    description: "Student brewing association"
+    duration: "2025 -- Present"
+    highlights:
+      - "Co-lead of the brewing team: brew the association's beer. Serve at student events with 500+ attendees."
