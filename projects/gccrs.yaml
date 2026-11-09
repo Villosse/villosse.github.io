@@ -1,0 +1,16 @@
+# Project page: /projects/gccrs/ (the file name is the address).
+# Listed and ordered in config.yaml under `projects`.
+
+title: "gccrs - Rust frontend for GCC"
+description: "Contributed to gccrs, the official Rust language frontend for the GCC compiler, during an internship at Embecosm."
+tech: ["C++", "Rust", "GCC", "Compilers"]
+github: "https://github.com/Rust-GCC/gccrs"
+resume: false
+
+# Project page only (optional):
+# details:
+#   - "A paragraph of the longer write-up. **Bold** and [links](https://example.com) work."
+# images:
+#   - src: "/assets/projects/gccrs/screenshot.png"   # file in public/assets/projects/gccrs/
+#     alt: "What the image shows"
+#     caption: "Optional caption."

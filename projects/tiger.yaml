@@ -1,0 +1,21 @@
+# Project page: /projects/tiger/ (the file name is the address).
+# Listed and ordered in config.yaml under `projects`.
+
+title: "Tiger Compiler"
+role: "Maintainer"
+date: "Jul 2025 -- Present"
+description: "EPITA's compiler construction project (20+ years of history), in which students build a complete compiler in C++."
+tech: ["C++", "Compilers", "Nix"]
+github: "https://gitlab.lre.epita.fr/tiger/tc-base"
+demo: "https://assignments.lre.epita.fr"
+highlights:
+  - "Halved the build environment size and updated the build system to support newer NixOS versions."
+  - "Cleaned up legacy code across the compiler's toolchain."
+
+# Project page only (optional):
+# details:
+#   - "A paragraph of the longer write-up. **Bold** and [links](https://example.com) work."
+# images:
+#   - src: "/assets/projects/tiger/screenshot.png"   # file in public/assets/projects/tiger/
+#     alt: "What the image shows"
+#     caption: "Optional caption."

@@ -1,0 +1,21 @@
+# Project page: /projects/k/ (the file name is the address).
+# Listed and ordered in config.yaml under `projects`.
+
+title: "K"
+role: "x86 Kernel from Scratch, C, x86 Assembly"
+date: "2026"
+description: "An x86 kernel written from scratch that boots through GRUB/Multiboot and runs an ELF game from its own filesystem."
+tech: ["C", "x86 Assembly", "QEMU"]
+demo: "https://k.lre.epita.fr"
+link: "https://k.lre.epita.fr"
+highlights:
+  - "Built a kernel for x86 from scratch that boots through GRUB/Multiboot and loads and runs an ELF game binary from its own filesystem, tested in QEMU."
+  - "Implemented interrupts (IDT, PIC), serial, keyboard, timer, VGA drivers, a memory manager and syscalls."
+
+# Project page only (optional):
+# details:
+#   - "A paragraph of the longer write-up. **Bold** and [links](https://example.com) work."
+# images:
+#   - src: "/assets/projects/k/screenshot.png"   # file in public/assets/projects/k/
+#     alt: "What the image shows"
+#     caption: "Optional caption."

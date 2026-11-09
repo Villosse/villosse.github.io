@@ -1,0 +1,22 @@
+# Project page: /projects/ovm/ (the file name is the address).
+# Listed and ordered in config.yaml under `projects`.
+
+title: "OCaml Virtual Machine, OVM"
+role: "Maintainer"
+date: "Jul 2025 -- Present"
+description: "An OCaml virtual machine that interprets the Tiger compiler's intermediate representations."
+tech: ["OCaml", "Compilers", "Virtual Machine"]
+github: "https://gitlab.lre.epita.fr/tiger/ovm"
+link: "https://gitlab.lre.epita.fr/tiger/ovm"
+highlights:
+  - "Improved memory management in the HIR/LIR interpreter of OVM."
+  - "Implemented profiling in OVM, allowing the legacy HAVM interpreter to be deprecated."
+  - "Implementing an assembly to intermediate representation translator to test the Tiger Compiler's infinite-register assembly interpreter."
+
+# Project page only (optional):
+# details:
+#   - "A paragraph of the longer write-up. **Bold** and [links](https://example.com) work."
+# images:
+#   - src: "/assets/projects/ovm/screenshot.png"   # file in public/assets/projects/ovm/
+#     alt: "What the image shows"
+#     caption: "Optional caption."

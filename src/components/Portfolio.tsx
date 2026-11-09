@@ -3,23 +3,8 @@ import { config } from '../config';
 import { ContactIcon } from './ui/ContactIcon';
 import { getContactItems } from '../utils/contacts';
 import { RichText } from './ui/RichText';
-import type { Highlight } from '../config/schema';
-
-const Highlights: React.FC<{ items?: Highlight[] }> = ({ items }) =>
-    items?.length ? (
-        <ul className="tl-list">
-            {items.map((h, i) =>
-                typeof h === 'string' ? (
-                    <li key={i}><RichText text={h} /></li>
-                ) : (
-                    <li key={i}>
-                        <RichText text={h.text} />
-                        <Highlights items={h.items} />
-                    </li>
-                )
-            )}
-        </ul>
-    ) : null;
+import { Highlights } from './ui/Highlights';
+import { projectPath } from '../utils/projects';
 
 export const Portfolio: React.FC = () => {
     const fullName = `${config.personal.name} ${config.personal.surname}`;
@@ -172,11 +157,14 @@ export const Portfolio: React.FC = () => {
                 <section aria-label="Projects" className="card section-card">
                     <h2 className="section-title">Projects</h2>
                     <div className="project-grid">
-                        {config.projects.map((p, i) => (
-                            <article key={i} className="project-item">
+                        {config.projects.map((p) => (
+                            <article key={p.slug} className="project-item">
                                 <div className="project-top">
-                                    <span className="project-title">{p.title}</span>
+                                    <a href={projectPath(p.slug)} className="project-title">{p.title}</a>
                                     <div className="project-links">
+                                        <a href={projectPath(p.slug)} className="project-link">
+                                            Details
+                                        </a>
                                         {p.github && (
                                             <a href={p.github} target="_blank" rel="noopener noreferrer" className="project-link">
                                                 GitHub

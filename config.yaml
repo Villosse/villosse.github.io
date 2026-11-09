@@ -1,6 +1,7 @@
 # Single source for the website and the resume PDF (scripts/resume.ts).
 # Text fields accept **bold** and [label](url).
 # Entries with `resume: false` appear on the website only.
+# Projects live in projects/<name>.yaml, one file each, with a page at /projects/<name>/.
 # The phone number is not stored here: set RESUME_PHONE when building.
 
 personal:
@@ -81,43 +82,13 @@ education:
     year: "Feb -- Jun 2024"
     resume: false
 
+# Shown in this order; each one lives in projects/<name>.yaml.
+# A file that is not listed here is not published.
 projects:
-  - title: "Tiger Compiler"
-    role: "Maintainer"
-    date: "Jul 2025 -- Present"
-    description: "EPITA's compiler construction project (20+ years of history), in which students build a complete compiler in C++."
-    tech: ["C++", "Compilers", "Nix"]
-    github: "https://gitlab.lre.epita.fr/tiger/tc-base"
-    demo: "https://assignments.lre.epita.fr"
-    highlights:
-      - "Halved the build environment size and updated the build system to support newer NixOS versions."
-      - "Cleaned up legacy code across the compiler's toolchain."
-  - title: "OCaml Virtual Machine, OVM"
-    role: "Maintainer"
-    date: "Jul 2025 -- Present"
-    description: "An OCaml virtual machine that interprets the Tiger compiler's intermediate representations."
-    tech: ["OCaml", "Compilers", "Virtual Machine"]
-    github: "https://gitlab.lre.epita.fr/tiger/ovm"
-    link: "https://gitlab.lre.epita.fr/tiger/ovm"
-    highlights:
-      - "Improved memory management in the HIR/LIR interpreter of OVM."
-      - "Implemented profiling in OVM, allowing the legacy HAVM interpreter to be deprecated."
-      - "Implementing an assembly to intermediate representation translator to test the Tiger Compiler's infinite-register assembly interpreter."
-  - title: "K"
-    role: "x86 Kernel from Scratch, C, x86 Assembly"
-    date: "2026"
-    description: "An x86 kernel written from scratch that boots through GRUB/Multiboot and runs an ELF game from its own filesystem."
-    tech: ["C", "x86 Assembly", "QEMU"]
-    demo: "https://k.lre.epita.fr"
-    link: "https://k.lre.epita.fr"
-    highlights:
-      - "Built a kernel for x86 from scratch that boots through GRUB/Multiboot and loads and runs an ELF game binary from its own filesystem, tested in QEMU."
-      - "Implemented interrupts (IDT, PIC), serial, keyboard, timer, VGA drivers, a memory manager and syscalls."
-  - title: "gccrs - Rust frontend for GCC"
-    description: "Contributed to gccrs, the official Rust language frontend for the GCC compiler, during an internship at Embecosm."
-    tech: ["C++", "Rust", "GCC", "Compilers"]
-    github: "https://github.com/Rust-GCC/gccrs"
-    resume: false
+  - tiger
+  - ovm
+  - k
+  - gccrs
 
 volunteering:
   - organization: "Prologin"

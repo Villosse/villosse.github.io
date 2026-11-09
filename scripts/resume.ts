@@ -1,13 +1,14 @@
-// Generate resume/resume.typ from config.yaml. Usage: node scripts/resume.ts
+// Generate resume/resume.typ from config.yaml and projects/*.yaml. Usage: node scripts/resume.ts
 // The phone number is never stored in the repo: it comes from RESUME_PHONE.
-import { readFileSync, writeFileSync } from 'node:fs';
-import { load } from 'js-yaml';
-import { PortfolioSchema, type Highlight } from '../src/config/schema.ts';
-import { escapeTypst, toTypst, typstString, withSmartDashes } from '../src/utils/richtext.ts';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { loadConfig } from '../src/config/load.ts';
+import type { Highlight } from '../src/config/schema.ts';
+import { escapeTypst, toTypst, typstString } from '../src/utils/richtext.ts';
 
 const root = new URL('..', import.meta.url);
 const outDir = new URL('resume/', root);
-const config = withSmartDashes(PortfolioSchema.parse(load(readFileSync(new URL('config.yaml', root), 'utf8'))));
+const read = (url: URL) => (existsSync(url) ? readFileSync(url, 'utf8') : undefined);
+const config = loadConfig(read(new URL('config.yaml', root)) ?? '', (slug) => read(new URL(`projects/${slug}.yaml`, root)));
 
 const onResume = <T extends { resume: boolean }>(xs: T[] = []) => xs.filter((x) => x.resume);
 

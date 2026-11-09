@@ -39,8 +39,16 @@ const ContactSchema = z.object({
     resume: z.union([z.string().url(), z.string().startsWith("/")], "Valid resume URL or path is required").optional(),
 }).catchall(z.string().optional()); // Allow any additional contact fields
 
+const ProjectImageSchema = z.object({
+    src: z.string().startsWith("/", "Image path must start with /"),
+    alt: z.string().min(1, "Image alt text is required"),
+    caption: z.string().optional(),
+});
+
 const ProjectSchema = z.object({
     title: z.string().min(1, "Project title is required"),
+    // Set from the file name projects/<slug>.yaml; the page is /projects/<slug>/.
+    slug: z.string().regex(/^[a-z0-9-]+$/, "Project file names must be lowercase letters, digits and dashes"),
     description: z.string().min(1, "Project description is required"),
     tech: z.array(z.string()).min(1, "At least one technology is required"),
     github: z.string().url("Valid GitHub URL is required").optional(),
@@ -49,6 +57,9 @@ const ProjectSchema = z.object({
     date: z.string().optional(),
     link: z.string().url("Valid link URL is required").optional(),
     highlights: z.array(HighlightSchema).optional(),
+    // Project page only: longer write-up (one string per paragraph) and screenshots.
+    details: z.array(z.string()).optional(),
+    images: z.array(ProjectImageSchema).optional(),
     resume: ResumeFlag,
 });
 
@@ -89,7 +100,8 @@ export const PortfolioSchema = z.object({
     personal: PersonalSchema,
     contact: ContactSchema,
     skills: z.array(SkillGroupSchema).min(1, "At least one skill group is required"),
-    projects: z.array(ProjectSchema).min(1, "At least one project is required"),
+    projects: z.array(ProjectSchema).min(1, "At least one project is required")
+        .refine((ps) => new Set(ps.map((p) => p.slug)).size === ps.length, "Project names must be unique"),
     experience: z.array(ExperienceSchema).min(1, "At least one experience is required"),
     education: z.array(EducationSchema).min(1, "At least one education entry is required"),
     volunteering: z.array(VolunteeringSchema).optional(),

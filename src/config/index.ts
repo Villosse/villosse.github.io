@@ -1,8 +1,6 @@
-import { load } from 'js-yaml';
-import { PortfolioSchema } from "./schema";
-import { withSmartDashes } from "../utils/richtext";
-import configYaml from "../../config.yaml?raw";
+import { loadConfig } from './load';
+import configYaml from '../../config.yaml?raw';
 
-export const config = withSmartDashes(PortfolioSchema.parse(
-    load(configYaml)
-));
+const projectFiles = import.meta.glob<string>('../../projects/*.yaml', { query: '?raw', import: 'default', eager: true });
+
+export const config = loadConfig(configYaml, (slug) => projectFiles[`../../projects/${slug}.yaml`]);
