@@ -42,6 +42,7 @@ nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
                     pre-commit
                     nodejs_24
                     yarn
+                    typst
                     zip
                   ];
                   shellHook = ''

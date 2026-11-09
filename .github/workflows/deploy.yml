@@ -37,8 +37,12 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: Set up Typst
+        uses: typst-community/setup-typst@v4
       - name: Build
         run: yarn build
+        env:
+          RESUME_PHONE: ${{ secrets.RESUME_PHONE }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

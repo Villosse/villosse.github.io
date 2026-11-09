@@ -6,7 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 yarn dev        # Start dev server (localhost:5173)
-yarn build      # Type-check then bundle to dist/
+yarn build      # Type-check, build the resume PDF, then bundle to dist/
+yarn resume     # Generate resume/resume.typ from config.yaml and compile public/resume.pdf (needs typst)
 yarn lint       # Run ESLint
 yarn preview    # Preview the production build locally
 ```
@@ -34,7 +35,13 @@ Edit `config.yaml`. The schema (`src/config/schema.ts`) defines what fields are 
 - `personal` — name, title, image path (must start with `/`), description
 - `contact` — known keys (`email`, `github`, `linkedin`, `phone`, `twitter`, `discord`, `telegram`, `resume`, `website`) plus arbitrary custom keys; all optional. Custom keys are rendered with a capitalized label and no icon.
 - `skills` — each entry is either a plain string or an object with `name`, optional `level` (1–10), `years`, `description`. Level drives a color-coded progress bar.
-- `projects`, `experience`, `education` — straightforward arrays; see schema for required fields.
+- `projects`, `experience`, `education`, `volunteering` — arrays; see schema for required fields. Each entry may have `highlights` (bullets, optionally `{ text, items }` for sub-bullets) and `resume: false` to appear on the website only.
+- `skillGroups` — named skill lists (shown on the site and as the resume's Skills section).
+- Text fields accept `**bold**` and `[label](url)` (`src/utils/richtext.ts` converts to Typst and React).
+
+### Resume PDF
+
+`scripts/resume.ts` validates `config.yaml`, writes `resume/resume.typ` (gitignored), which applies the layout in `resume/template.typ`; `typst compile` turns it into `public/resume.pdf` (gitignored) using the vendored XCharter fonts in `resume/fonts/`. The resume uses `highlights`, not `description`. The phone number is never committed: it comes from the `RESUME_PHONE` env var (a `.env` file locally, a GitHub Actions secret in CI) and is omitted when unset.
 
 Static assets (avatar, etc.) go in `public/assets/` and are referenced as `/assets/filename`.
 
@@ -50,4 +57,4 @@ Styling is Tailwind via CSS variables with a paper-style theme. The `@` alias re
 
 ## Deployment
 
-Pushing to `main` triggers the GitHub Actions workflow (`.github/workflows/deploy.yml`), which runs `yarn build` and deploys `dist/` to GitHub Pages. The Vite `base` is `/` (not a sub-path).
+Pushing to `main` triggers the GitHub Actions workflow (`.github/workflows/deploy.yml`), which installs Typst, runs `yarn build` (with the `RESUME_PHONE` secret) and deploys `dist/` to GitHub Pages. The Vite `base` is `/` (not a sub-path).

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && yarn resume && vite build",
+    "resume": "node --env-file-if-exists=.env scripts/resume.ts && typst compile --font-path resume/fonts --ignore-system-fonts resume/resume.typ public/resume.pdf",
     "lint": "eslint .",
     "preview": "vite preview"
   },

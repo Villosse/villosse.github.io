@@ -24,3 +24,8 @@ vite.svg
 *.sln
 *.sw?
 
+
+# Generated resume (scripts/resume.ts); .env holds RESUME_PHONE
+resume/resume.typ
+public/resume.pdf
+.env
