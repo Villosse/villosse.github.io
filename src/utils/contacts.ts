@@ -63,7 +63,3 @@ export const getContactItems = (contacts: Record<string, string | undefined>): C
 
   return contactItems;
 };
-
-export const getPrimaryEmail = (contacts: Record<string, string | undefined>): string | undefined => {
-  return contacts.email;
-};

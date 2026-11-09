@@ -36,7 +36,7 @@ export const toTypst = (s: string): string =>
     .join('');
 
 // Typographic dashes: "---" -> em dash, "--" -> en dash.
-export const smartDashes = (s: string): string => s.replace(/---/g, '—').replace(/--/g, '–');
+const smartDashes = (s: string): string => s.replace(/---/g, '—').replace(/--/g, '–');
 
 // Apply smartDashes to every string in the config, except URLs, paths and the
 // personal name fields (whose "--" is a literal double hyphen).

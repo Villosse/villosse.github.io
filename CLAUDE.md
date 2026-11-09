@@ -47,13 +47,14 @@ Static assets (avatar, etc.) go in `public/assets/` and are referenced as `/asse
 
 ### UI components
 
-`src/components/ui/` holds small, self-contained primitives (Button, Card, Avatar, ProgressBar, ContactIcon, Separator) built on Radix UI. `src/components/layout/` has Header and Footer (currently unused in the main render).
+`src/components/ui/` holds `ContactIcon` (inline SVG per contact type) and `RichText` (renders the inline markup).
 
 Utility logic lives in:
 - `src/utils/contacts.ts` — maps the contact record to typed `ContactItem[]` for rendering
-- `src/utils/skills.ts` — normalizes string/object skills and maps level → color tokens
+- `src/utils/skills.ts` — normalizes string/object skills
+- `src/utils/richtext.ts` — inline markup parser, Typst escaping, and the `--` → en dash conversion
 
-Styling is Tailwind via CSS variables with a paper-style theme. The `@` alias resolves to `src/`.
+Styling is plain CSS in `src/styles/global.css`, themed with CSS variables. The `@` alias resolves to `src/`.
 
 ## Deployment
 

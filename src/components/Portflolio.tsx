@@ -62,7 +62,7 @@ export const Portfolio: React.FC = () => {
                                     rel={c.isEmail ? undefined : 'noopener noreferrer'}
                                     className="contact-link"
                                 >
-                                    <ContactIcon type={c.icon} className="w-4 h-4" />
+                                    <ContactIcon type={c.icon} />
                                     <span>{c.label}</span>
                                 </a>
                             ))}

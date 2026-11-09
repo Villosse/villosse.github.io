@@ -1,11 +1,7 @@
 import { Portfolio } from './components/Portflolio';
 
 function App() {
-    return (
-        <div className="App">
-            <Portfolio />
-        </div>
-    );
+    return <Portfolio />;
 }
 
 export default App;
