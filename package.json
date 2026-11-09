@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && yarn resume && vite build",
-    "resume": "node --env-file-if-exists=.env scripts/resume.ts && typst compile --font-path resume/fonts --ignore-system-fonts resume/resume.typ public/resume.pdf",
+    "resume": "node --env-file-if-exists=.env scripts/resume.ts && typst compile --font-path resume/fonts --ignore-system-fonts resume/resume.typ public/lenny_chiadmi-delage_resume.pdf",
     "lint": "eslint .",
     "preview": "vite preview"
   },

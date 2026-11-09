@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 yarn dev        # Start dev server (localhost:5173)
 yarn build      # Type-check, build the resume PDF, then bundle to dist/
-yarn resume     # Generate resume/resume.typ from config.yaml and compile public/resume.pdf (needs typst)
+yarn resume     # Generate resume/resume.typ from config.yaml and compile public/lenny_chiadmi-delage_resume.pdf (needs typst)
 yarn lint       # Run ESLint
 yarn preview    # Preview the production build locally
 ```
@@ -23,7 +23,7 @@ This is a **data-driven portfolio site**: all visible content lives in `config.y
 ```
 config.yaml  →  src/config/index.ts  (js-yaml parse + Zod validation)
                         ↓
-             src/components/Portflolio.tsx  (single-page render)
+             src/components/Portfolio.tsx  (single-page render)
 ```
 
 `config.yaml` is imported as a raw string via Vite's `?raw` suffix, parsed by `js-yaml`, then validated against `PortfolioSchema` in `src/config/schema.ts`. A schema error at startup crashes the app with a Zod message — this is intentional.
@@ -40,7 +40,7 @@ Edit `config.yaml`. The schema (`src/config/schema.ts`) defines what fields are 
 
 ### Resume PDF
 
-`scripts/resume.ts` validates `config.yaml`, writes `resume/resume.typ` (gitignored), which applies the layout in `resume/template.typ`; `typst compile` turns it into `public/resume.pdf` (gitignored) using the vendored XCharter fonts in `resume/fonts/`. The resume uses `highlights`, not `description`. The phone number is never committed: it comes from the `RESUME_PHONE` env var (a `.env` file locally, a GitHub Actions secret in CI) and is omitted when unset.
+`scripts/resume.ts` validates `config.yaml`, writes `resume/resume.typ` (gitignored), which applies the layout in `resume/template.typ`; `typst compile` turns it into `public/lenny_chiadmi-delage_resume.pdf` (gitignored) using the vendored XCharter fonts in `resume/fonts/`. The resume uses `highlights`, not `description`. The phone number is never committed: it comes from the `RESUME_PHONE` env var (a `.env` file locally, a GitHub Actions secret in CI) and is omitted when unset.
 
 The `head-from-config` plugin in `vite.config.ts` writes the `<title>`, favicon link, meta description and Open Graph tags into `index.html` from `personal`, so they are present without JavaScript.
 
@@ -58,4 +58,4 @@ Styling is plain CSS in `src/styles/global.css`, themed with CSS variables. The 
 
 ## Deployment
 
-Pushing to `main` triggers the GitHub Actions workflow (`.github/workflows/deploy.yml`), which installs Typst, runs `yarn build` (with the `RESUME_PHONE` secret) and deploys `dist/` to GitHub Pages. The Vite `base` is `/` (not a sub-path).
+Pushing to `main` triggers the GitHub Actions workflow (`.github/workflows/deploy.yml`), which runs `yarn lint`, installs Typst, runs `yarn build` (with the `RESUME_PHONE` secret) and deploys `dist/` to GitHub Pages. The Vite `base` is `/` (not a sub-path). `.github/workflows/ci.yml` runs the same lint and build on pull requests and other branches, without deploying.

@@ -1,0 +1,30 @@
+# Lint and build every pull request and non-main branch; main is checked by the deploy workflow.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches-ignore: ['main']
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Lint
+        run: yarn lint
+      - name: Set up Typst
+        uses: typst-community/setup-typst@v4
+      - name: Build
+        run: yarn build
